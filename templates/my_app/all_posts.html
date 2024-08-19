@@ -1,0 +1,194 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Posts</title>
+    <!-- css -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- Bootstrap cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- gsap libs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    <style>
+        #bg-header-image {
+            background-image: url('{% static "images/hero-bg_rpkd2a.jpg" %}');
+            padding: 2rem;
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+        .post-card:hover {
+            transform: translateY(-5px);
+            transition: 0.3s;
+            border-image: url('{% static "images/hero-bg_rpkd2a.jpg" %}') 1;
+            transition: transform 0.3s ease, border 0.3s ease;
+        }
+        .text-body-github{
+            color: blueviolet;
+        }
+        .text-x{
+            color: white;
+        }
+        .post-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 60px;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 1200px) {
+            .post-list {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .post-list {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .post-list {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 40px;
+            }
+        }
+        body{
+            background-color: black;
+            color: white;
+        }
+        .text-underline{
+            text-decoration: underline;
+        }
+        .list-none{
+            list-style: none;
+        }
+        .nav-link{
+            color: yellow;
+        }
+        .nav-link:hover{
+            color: rgb(151, 151, 51);
+        }
+    </style>
+</head>
+<body>
+    <!-- top header -->
+    <section>
+        <div id="bg-header-image">
+            <div class="text-end">
+                <a href="{% url 'index' %}"><button class="btn rounded-0 btn-dark p-0 px-3">HOME</button></a>
+                <a href="{% url 'all_posts' %}"><button class="btn rounded-0 btn-primary p-0 fw-bold px-3 ms-3">BLOG</button></a>
+            </div>
+            <!-- social media -->
+            <div class="text-end text-light">
+                <ul class="d-flex justify-content-end gap-4 pt-5 pb-5 text-white list-none sm:gap-8">
+                    <li>Twitter</li>
+                    <li>Linkedin</li>
+                    <li>github</li>
+                    <li>dev.io</li>
+                </ul>
+            </div>
+            <!-- page -->
+            <div class="text-start text-white px-lg-4 px-0">
+                <h1>BLOG</h1>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <div class="container-fluid mt-lg-5 mt-3 px-lg-5 px-3">
+            <div class="mb-5">
+                <h1 class="text-underline">All Posts</h1>
+                <hr>
+            </div>
+            <div class="post-list">
+                {% for blog in posts %}
+                <div class="post-card shadow-l">
+                    <small>{{ blog.created_at|date:"F j, Y"  }}</small>
+                    <h2><a href="{% url 'post_detail' pk=blog.pk %}" class="nav-link mt-2">{{ blog.title }}</a></h2>
+                    <p>{{ blog.content|truncatewords:40|striptags|safe }}</p>
+                </div>
+                {% endfor %} 
+            </div>
+            <!-- <a href="{% url 'index' %}" >Back to Home</a> -->
+        </div>
+    </main>
+    <!-- Footer -->
+    <div class="container-fluid px-lg-5 px-3">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top mt-5">
+          <div class="col-md-4 d-flex align-items-center">
+            <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+              <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+            </a>
+            <span class="mb-3 mb-md-0">&copy; 2024 PrimeCoder, Inc</span>
+          </div>
+      
+          <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-x fs-4" href="#"><i class="bi bi-twitter-x" width="24" height="24"></i></a></li>
+            <li class="ms-3"><a class="text-primary fs-4" href="#"><i class="bi bi-linkedin"></i></a></li>
+            <li class="ms-3"><a class="text-body-github fs-4" href="#"><i class="bi bi-github"></i></a></li>
+            <li class="ms-3"><a class="text-x fs-4" href="#"><i class="fa-brands fa-dev"></i></a></li>
+          </ul>
+        </footer>
+    </div>     
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/ScrollTrigger.min.js"></script>
+    <script>
+        // Hero section animations
+        gsap.from("#bg-header-image .text-x", {
+            duration: 1,
+            y: 20,
+            opacity: 0,
+            stagger: 0.2,
+            ease: "power2.out"
+        });
+        
+        
+        gsap.from(".text-end button", {
+            duration: 1,
+            x: 20,
+            opacity: 0,
+            stagger: 0.2,
+            ease: "power2.out",
+            delay: 0.5
+        });
+        gsap.from(".list-none li", {
+            duration: 1,
+            x: -20,
+            opacity: 0,
+            stagger: 0.2,
+            ease: "power2.out",
+            delay: 0.5
+        });
+    
+        gsap.registerPlugin(ScrollTrigger);
+
+            gsap.utils.toArray(".post-card").forEach(card => {
+                gsap.from(card, {
+                duration: 0.9,
+                y: 20, // Move from below
+                opacity: 0, // Start as invisible
+                stagger: 0.2, // Stagger the start times
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top bottom", // Animation starts when the top of the card hits the bottom of the viewport
+                    end: "bottom top", // Animation ends when the bottom of the card hits the top of the viewport
+                    toggleActions: "play none none reverse", // Play animation when entering and reverse when leaving
+                    markers: false // Set to true if you want to see debug markers
+                }
+            });
+        });
+    </script>
+</body>
+</html>

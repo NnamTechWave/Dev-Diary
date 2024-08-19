@@ -1,0 +1,263 @@
+{% load static %}
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <meta name="generator" content="Hugo 0.122.0">
+        <title>Dashboard Template · Bootstrap v5.3</title>
+        <!-- css cdn -->
+        <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+        <!-- bootstrap cdn -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> 
+        <link href="/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <!-- Favicons -->
+        <link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+        <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+        <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+        <link rel="manifest" href="/docs/5.3/assets/img/favicons/manifest.json">
+        <link rel="mask-icon" href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
+        <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">
+        <meta name="theme-color" content="#712cf9">
+
+        <style>
+            .activ{
+              background-color: #5a23c8;
+              color: white;
+            }
+            .activ:hover{
+              background-color: rgb(192, 180, 180);
+              color: #5a23c8;
+            }
+            .nav-link.activ{
+              background-color: #5a23c8;
+              color: rgb(255, 255, 255);
+            }
+            .nav-link{
+                color: yellow;
+            }
+            .nav-link:hover{
+                color: rgb(151, 151, 51);
+            }
+            .alert-success {
+                background-color: #4CAF50;
+                color: white;
+            }
+            .alert-error {
+                background-color: #f44336;
+            }
+            .errorlist{
+                display: none;
+            }
+        </style>
+
+    </head>
+    <body>          
+        <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+            <symbol id="calendar3" viewBox="0 0 16 16">
+                <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+            </symbol>
+            <symbol id="cart" viewBox="0 0 16 16">
+                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+            </symbol>
+            <symbol id="door-closed" viewBox="0 0 16 16">
+                <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z"/>
+                <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
+            </symbol>
+            <symbol id="file-earmark" viewBox="0 0 16 16">
+                <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+            </symbol>
+            <symbol id="gear-wide-connected" viewBox="0 0 16 16">
+                <path d="M7.068.727c.243-.97 1.62-.97 1.864 0l.071.286a.96.96 0 0 0 1.622.434l.205-.211c.695-.719 1.888-.03 1.613.931l-.08.284a.96.96 0 0 0 1.187 1.187l.283-.081c.96-.275 1.65.918.931 1.613l-.211.205a.96.96 0 0 0 .434 1.622l.286.071c.97.243.97 1.62 0 1.864l-.286.071a.96.96 0 0 0-.434 1.622l.211.205c.719.695.03 1.888-.931 1.613l-.284-.08a.96.96 0 0 0-1.187 1.187l.081.283c.275.96-.918 1.65-1.613.931l-.205-.211a.96.96 0 0 0-1.622.434l-.071.286c-.243.97-1.62.97-1.864 0l-.071-.286a.96.96 0 0 0-1.622-.434l-.205.211c-.695.719-1.888.03-1.613-.931l.08-.284a.96.96 0 0 0-1.186-1.187l-.284.081c-.96.275-1.65-.918-.931-1.613l.211-.205a.96.96 0 0 0-.434-1.622l-.286-.071c-.97-.243-.97-1.62 0-1.864l.286-.071a.96.96 0 0 0 .434-1.622l-.211-.205c-.719-.695-.03-1.888.931-1.613l.284.08a.96.96 0 0 0 1.187-1.186l-.081-.284c-.275-.96.918-1.65 1.613-.931l.205.211a.96.96 0 0 0 1.622-.434l.071-.286zM12.973 8.5H8.25l-2.834 3.779A4.998 4.998 0 0 0 12.973 8.5zm0-1a4.998 4.998 0 0 0-7.557-3.779l2.834 3.78h4.723zM5.048 3.967c-.03.021-.058.043-.087.065l.087-.065zm-.431.355A4.984 4.984 0 0 0 3.002 8c0 1.455.622 2.765 1.615 3.678L7.375 8 4.617 4.322zm.344 7.646.087.065-.087-.065z"/>
+            </symbol>
+            <symbol id="graph-up" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"/>
+            </symbol>
+            <symbol id="house-fill" viewBox="0 0 16 16">
+                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
+                <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+            </symbol>
+            <symbol id="search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </symbol>
+        </svg>
+      
+        <header class="navbar sticky-topflex-md-nowrap p-0 shadow" data-bs-theme="dark">
+            <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="#">Company name</a>
+        
+            <ul class="navbar-nav flex-row d-md-none">
+                <li class="nav-item text-nowrap">
+                    <button class="nav-link px-3 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSearch" aria-controls="navbarSearch" aria-expanded="false" aria-label="Toggle search">
+                        <svg class="bi"><use xlink:href="#search"/></svg>
+                    </button>
+                </li>
+                <li class="nav-item text-nowrap">
+                    <button class="nav-link px-3 text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                        <svg class="bi"><use xlink:href="#list"/></svg>
+                    </button>
+                </li>
+            </ul>
+        
+            <div id="navbarSearch" class="navbar-search w-100 collapse">
+                <input class="form-control w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
+            </div>
+        </header>
+      
+        <div class="container-fluid">
+            <div class="row">
+                <div class="sidebar border border-right col-md-3 col-lg-2 p-0">
+                    <div class="offcanvas-md offcanvas-end" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="sidebarMenuLabel">Company name</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+                            <ul class="nav flex-column mt-5">
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center gap-2" aria-current="page" href="{% url 'admin_dashboard' %}">
+                                        <svg class="bi"><use xlink:href="#house-fill"/></svg>
+                                        Dashboard
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center gap-2" href="{% url 'add_post' %}">
+                                        <svg class="bi"><use xlink:href="#file-earmark"/></svg>
+                                        Add Post
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center gap-2" href="{% url 'show' %}">
+                                        <svg class="bi"><use xlink:href="#cart"/></svg>
+                                        view-post
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center gap-2 activ" href="{% url 'view_user' %}">
+                                        <i class="bi bi-people-fill"></i>
+                                        View Users 
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center gap-2 " href="{% url 'comments' %}">
+                                        <i class="bi bi-chat-left-text"></i>
+                                        Comments
+                                    </a>
+                                </li>
+                            </ul>
+                            <hr class="my-3">
+                
+                            <ul class="nav flex-column mb-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center gap-2" href="#">
+                                        <svg class="bi"><use xlink:href="#gear-wide-connected"/></svg>
+                                        Settings
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center gap-2"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                        <svg class="bi"><use xlink:href="#door-closed"/></svg>
+                                        Sign out
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Logout warning</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Hello {{user.username}}, Are you sure you want to logout
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+                                <a href="{% url 'logout' %}"  class="btn btn-primary">Understood</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" style="height: 94.7vh; overflow: auto;">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Users Overview</h1>
+                    </div>
+                    <div class="container mt-4 p-lg-5 p-3 bg-light shadow">
+                        {% if messages %}
+                        <div id="message-container">
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        
+                        <div class="table-responsive"> <!-- Added responsive wrapper -->
+                            <table class="table table-striped table-bordered table-sm">  
+                                <thead class="thead-dark">  
+                                    <tr>  
+                                        <th>Id</th>  
+                                        <th>Username</th>  
+                                        <th>Email</th>  
+                                        <th>is_staff</th>  
+                                        <th>is_Admin</th>  
+                                        <th>Actions</th>  
+                                    </tr>  
+                                </thead>  
+                                <tbody>  
+                                    {% for User in users %}
+                                    <tr>  
+                                        <td>{{ User.id }}</td>  
+                                        <td><a href="{% url 'edit_user' User.id %}">{{ User.username }}</a></td>  
+                                        <td>{{ User.email }}</td>  
+                                        <td>{{ User.is_staff }}</td>  
+                                        <td>{{ User.is_superuser }}</td>  
+                                        <td class="d-flex flex-wrap">  
+                                            <!-- Edit -->
+                                            <a href="{% url 'edit_user' User.id %}" class="btn btn-success btn-sm me-2 mb-2">
+                                                <i class="bi bi-pencil-square pe-2"></i>Edit
+                                            </a>
+                                            <!-- Delete -->
+                                            <a href="{% url 'delete_users' User.id %}" class="btn btn-danger btn-sm mb-2">
+                                                <i class="bi bi-trash3-fill pe-2"></i>Delete
+                                            </a>
+                                        </td> 
+                                    </tr>  
+                                    {% endfor %}
+                                </tbody>  
+                            </table> 
+                        </div>
+                    </div>                    
+                </main>
+            </div>
+        </div>
+    </body>
+    <script>
+        // Wait for the DOM to load
+        document.addEventListener("DOMContentLoaded", function() {
+            // Select the message container
+            const messageContainer = document.getElementById('message-container');
+            
+            // If there is a message container, hide it after 3 seconds (3000 ms)
+            if (messageContainer) {
+                setTimeout(function() {
+                    messageContainer.style.display = 'none';
+                }, 3000);
+            }
+        });
+    </script>
+    <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script><script src="dashboard.js"></script></body>
+</html>

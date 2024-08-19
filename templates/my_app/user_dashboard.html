@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Your Dashboard</h2>
+        <p>Welcome, {{ user.username }}!</p>
+        <h3>Your Comments</h3>
+        <ul>
+            {% for comment in comments %}
+            <li>{{ comment.post.title }}: {{ comment.content }}</li>
+            {% endfor %}
+        </ul>
+        <!-- User Logout -->
+<a href="{% url 'user_logout' %}">Logout</a>
+    </div>
+</body>
+</html>

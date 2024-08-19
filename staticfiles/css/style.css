@@ -1,0 +1,61 @@
+#bg-header-image {
+    background-image: url('{% static "images/hero-bg_rpkd2a.jpg" %}');
+    padding: 2rem;
+    background-size: cover;
+    background-position: center;
+}
+#bg-header-image button {
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+.list-none{
+    list-style: none;
+}
+.recipe-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+.recipe-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 60px;
+    margin-top: 3rem;
+}
+
+@media (max-width: 1200px) {
+    .recipe-list {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .recipe-list {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .recipe-list {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 40px;
+    }
+}
+#bg-header-image {
+    background-image: url('{% static "images/hero-bg_rpkd2a.jpg" %}');
+    padding: 2rem;
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+}
+.post-card:hover {
+    transform: translateY(-5px);
+    transition: 0.3s;
+    border-image: url('{% static "images/hero-bg_rpkd2a.jpg" %}') 1;
+    transition: transform 0.3s ease, border 0.3s ease;
+}
+.text-body-github{
+    color: blueviolet;
+}

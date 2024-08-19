@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> 
+    <!-- css -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'ckeditor/ckeditor/contents.css' %}"> -->
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- gsap libs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+
+    
+    <style>
+        #bg-header-image {
+            background-image: url('{% static "images/hero-bg_rpkd2a.jpg" %}');
+            padding: 2rem;
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .text-x{
+            color: white;
+            transform: translateY(20px);
+        }
+        .post-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 60px;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 1200px) {
+            .post-list {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .post-list {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .post-list {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 40px;
+            }
+        }
+        .post-card:hover {
+            transform: translateY(-5px);
+            transition: 0.3s;
+            border-image: url('{% static "images/hero-bg_rpkd2a.jpg" %}') 1;
+            transition: transform 0.3s ease, border 0.3s ease;
+        }
+        body{
+            background-color: black;
+            color: white;
+        }
+        .text-underline{
+            text-decoration: underline;
+        }
+        #about-section img,
+        #about-section h1,
+        #about-section p {
+            opacity: 0; /* Start hidden */
+            transform: translateY(20px); /* Start off-screen */
+            transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
+        }
+        .letter {
+            display: inline-block; /* Ensure each letter is treated as an individual block for animation */
+        }
+    </style>
+</head>
+<body>
+    <!-- top header -->
+    <section>
+        <div id="bg-header-image">
+            <div class="text-end">
+                <button class="btn rounded-0 btn-primary p-0 px-3 fw-bold">HOME</button>
+                <a href="{% url 'all_posts' %}"><button class="btn rounded-0 btn-dark p-0 px-3 ms-3">BLOG</button></a>
+            </div>
+            <!-- social media -->
+            <div class="text-end text-light">
+                <ul class="d-flex justify-content-end gap-4 pt-5 pb-5 text-white list-none sm:gap-8">
+                    <li>Twitter</li>
+                    <li>Linkedin</li>
+                    <a href="http://github.com/Codes004/" class="nav-link"><li>github</li></a>
+                    <li>dev.io</li>
+                </ul>
+            </div>
+            <!-- about -->
+            <div id="about-section">
+                <div class="row px-lg-4 px-0">
+                    <div class="col-lg-3 col-12">
+                        <div>
+                            <img src="{% static 'images/bespoke-client.jpg' %}" class="img-fluid rounded-3 shadow-lg" style="height: 16rem; width: 100%; object-fit: cover;" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-12">
+                        <div class="text-start text-white mt-5">
+                            <h1 id="about-heading">Hi, my name is Daniel Cyril Nnam</h1>
+                            <p id="about-paragraph">
+                                I'm a software developer experienced with React, JavaScript, and Python and I write on web development, testing, and growing as a software engineer.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </section>
+    <main>
+        <div class="container-fluid mt-lg-5 mt-3 px-lg-5 px-3">
+            <h1 class="fw-normal text-underline">Latest posts</h1>
+            <hr>
+
+            <div class="mt-0">
+                <div class="post-list">
+                    {% for post in latest_posts %}
+                    <div class=" post-card">
+                        <small>Published: {{ post.created_at|date:"F j, Y" }}</small>
+                        <h3><a href="{% url 'post_detail' pk=post.pk %}" class="nav-link mt-2">{{ post.title }}</a></h3>
+                        <p class="mt-3">{{ post.content|truncatewords:20|striptags|safe }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </main>
+      <!-- Footer -->
+      <div class="container-fluid px-lg-5 px-3">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top mt-5">
+        <div class="col-md-4 d-flex align-items-center">
+            <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+            <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+            </a>
+            <span class="mb-3 mb-md-0">&copy; 2024 PrimeCoder, Inc</span>
+        </div>
+    
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-x fs-4" href="#"><i class="bi bi-twitter-x" width="24" height="24"></i></a></li>
+            <li class="ms-3"><a class="text-primary fs-4" href="#"><i class="bi bi-linkedin"></i></a></li>
+            <li class="ms-3"><a class="text-body-github fs-4" href="#"><i class="bi bi-github"></i></a></li>
+            <li class="ms-3"><a class="text-x fs-4" href="#"><i class="fa-brands fa-dev"></i></a></li>
+        </ul>
+        </footer>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/ScrollTrigger.min.js"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+
+</body>
+</html>
