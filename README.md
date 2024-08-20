@@ -13,7 +13,7 @@ Dev-Diary is a personal blogging web application built using Django. It allows u
 
 1. Clone the repository:
     ```
-    git clone https://github.com/yourusername/Dev-Diary.git
+    git clone https://github.com/NnamTechWave/Dev-Diary.git
     ```
 
 2. Install dependencies:
