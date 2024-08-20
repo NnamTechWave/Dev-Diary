@@ -1,6 +1,6 @@
 from django import forms
-from .models import blog
-from .models import Comment
+# from .models import blog
+from .models import *
 from ckeditor.widgets import CKEditorWidget
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -15,6 +15,12 @@ class blogForm(forms.ModelForm):
         model = blog
         fields = ['title', 'content']
         db_table = "blogForm"
+
+class personal_detailForm(forms.ModelForm):  
+    class Meta:  
+        model = personal_detail  
+        fields = "__all__" 
+
 
 class AdminSignupForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
