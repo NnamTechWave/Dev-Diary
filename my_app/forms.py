@@ -20,6 +20,7 @@ class personal_detailForm(forms.ModelForm):
     class Meta:  
         model = personal_detail  
         fields = "__all__" 
+        db_table = "personal_detailForm"
 
 
 class AdminSignupForm(forms.ModelForm):

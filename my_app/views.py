@@ -1,7 +1,7 @@
 from datetime import timezone
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import blog, Comment , User
-from .forms import blogForm, CommentForm
+from .models import blog, Comment , User, personal_detail
+from .forms import blogForm, CommentForm, personal_detailForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 # from django.contrib.auth import login, authenticate
@@ -22,7 +22,12 @@ def user_is_admin(user):
 # Create your views here.
 def index(request):
     latest_posts = blog.objects.all().order_by('-created_at')[:6]
-    return render(request, 'my_app/index.html', {'latest_posts': latest_posts})
+    details =  personal_detail.objects.all()
+    context = {
+        'latest_posts': latest_posts,
+        'details':details
+    }
+    return render(request, 'my_app/index.html', context)
 
 def all_posts(request):
     posts = blog.objects.all().order_by('-created_at')
@@ -354,9 +359,25 @@ def delete_comment(request, id):
         return redirect('comments')
     return render(request, 'admin/delete_comment.html', {'comment': comment})
 
+
 @login_required
 def settings(request):
-    return render(request, 'admin/settings.html')
+    # Retrieve the first instance of the personal_detail model for the logged-in user
+    detail = personal_detail.objects.first()
+
+    if request.method == 'POST':
+        # Update the personal details with the provided data
+        form = personal_detailForm(request.POST, request.FILES, instance=detail)
+        if form.is_valid():
+            form.save()
+            return redirect('settings')
+    else:
+        # Display the form with the current personal details filled in
+        form = personal_detailForm(instance=detail)
+    
+    # Render the settings page with the form and the personal details
+    return render(request, 'admin/settings.html', {'form': form, 'personal_detail': detail})
+
 
 def admin_logout(request):
     if request.user.is_staff:  # Ensure only admin can use this logout

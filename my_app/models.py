@@ -25,7 +25,7 @@ class Comment(models.Model):
     
 class personal_detail(models.Model):
     full_name = models.CharField(max_length=200)
-    bio = models.CharField(max_length=200)
+    bio = models.TextField()
     image = models.ImageField(upload_to='uploads/')
 
 class Meta:

@@ -1,6 +1,11 @@
 from django.urls import path, include
 from . import views
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
+
+from django.contrib import admin
+
 # from .views import signup, CustomLoginView
 
 urlpatterns=[
@@ -36,9 +41,11 @@ urlpatterns=[
     path('edit-comment/<int:id>/', views.edit_comment, name='edit_comment'),
     path('update-comment/<int:id>/', views.update_comment, name='update_comment'),
     path('delete-comment/<int:id>/', views.delete_comment, name='delete_comment'),
+    # path('addimage/', addimage, name='addimage'),
+    # path('displayImage/', displayImage, name='displayImage'),
 
 
 
 
 
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
