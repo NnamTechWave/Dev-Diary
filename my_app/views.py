@@ -370,6 +370,7 @@ def settings(request):
         form = personal_detailForm(request.POST, request.FILES, instance=detail)
         if form.is_valid():
             form.save()
+            messages.success(request, 'You have successfully updated your profile.')
             return redirect('settings')
     else:
         # Display the form with the current personal details filled in
