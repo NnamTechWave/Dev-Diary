@@ -75,12 +75,12 @@
         #about-section img,
         #about-section h1,
         #about-section p {
-            opacity: 0; /* Start hidden */
+            opacity: 1; /* Start hidden */
             transform: translateY(20px); /* Start off-screen */
             transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
         }
-        .letter {
-            display: inline-block; /* Ensure each letter is treated as an individual block for animation */
+        .name{
+            color: yellow;
         }
     </style>
 </head>
@@ -104,19 +104,21 @@
             <!-- about -->
             <div id="about-section">
                 <div class="row px-lg-4 px-0">
+                    {% for personal_detail in details %}
                     <div class="col-lg-3 col-12">
                         <div>
-                            <img src="{% static 'images/bespoke-client.jpg' %}" class="img-fluid rounded-3 shadow-lg" style="height: 16rem; width: 100%; object-fit: cover;" alt="">
+                            <img src="{{ personal_detail.image.url }}" class="img-fluid rounded-3 shadow-lg" style="height: 16rem; width: 100%; object-fit: cover;" alt="">
                         </div>
                     </div>
                     <div class="col-lg-7 col-12">
-                        <div class="text-start text-white mt-5">
-                            <h1 id="about-heading">Hi, my name is Daniel Cyril Nnam</h1>
+                        <div class="text-start text-white mt-lg-5 mt-3">
+                            <h1 id="about-heading">Hi, my name is <span class="name">{{ personal_detail.full_name|truncatewords:20 }}</span></h1>
                             <p id="about-paragraph">
-                                I'm a software developer experienced with React, JavaScript, and Python and I write on web development, testing, and growing as a software engineer.
+                                {{ personal_detail.bio }}
                             </p>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
             
