@@ -24,4 +24,11 @@ class Comment(models.Model):
         return f'Comment by {self.author} on {self.post}'
     
 class personal_detail(models.Model):
+    full_name = models.CharField(max_length=200)
+    bio = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='uploads/')
+
+class Meta:
+    db_table = "personal_detail"
+
     
