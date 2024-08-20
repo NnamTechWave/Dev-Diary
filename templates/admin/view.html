@@ -3,7 +3,7 @@
 <html lang="en" data-bs-theme="auto">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
         <meta name="generator" content="Hugo 0.122.0">
@@ -42,6 +42,10 @@
           .nav-link:hover{
               color: rgb(151, 151, 51);
           }
+        .offcanvas-end{
+                background-color: #4e2c91;
+                color: white;   
+        }
         </style>
 
     </head>
@@ -78,32 +82,21 @@
         </svg>
       
         <header class="navbar sticky-top flex-md-nowrap p-0 shadow" data-bs-theme="dark">
-            <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="#">Dev-Dairy</a>
+            <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="{% url 'admin_dashboard' %}">Dev-Dairy</a>
         
             <ul class="navbar-nav flex-row d-md-none">
-                <li class="nav-item text-nowrap">
-                    <button class="nav-link px-3 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSearch" aria-controls="navbarSearch" aria-expanded="false" aria-label="Toggle search">
-                        <svg class="bi"><use xlink:href="#search"/></svg>
-                    </button>
-                </li>
-                <li class="nav-item text-nowrap">
-                    <button class="nav-link px-3 text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                        <svg class="bi"><use xlink:href="#list"/></svg>
-                    </button>
-                </li>
+                <button class="navbar-toggle px-3 nav-link p-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
             </ul>
-        
-            <div id="navbarSearch" class="navbar-search w-100 collapse">
-                <input class="form-control w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
-            </div>
         </header>
       
         <div class="container-fluid">
             <div class="row">
                 <div class="sidebar border border-right col-md-3 col-lg-2 p-0">
                     <div class="offcanvas-md offcanvas-end " tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
-                        <div class="offcanvas-header">
-                            <h5 class="offcanvas-title" id="sidebarMenuLabel">Company name</h5>
+                        <div class="offcanvas-header bg-light text-dark">
+                            <h5 class="offcanvas-title" id="sidebarMenuLabel">Dev-Dairy</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
                         </div>
                         <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
@@ -143,7 +136,7 @@
                 
                             <ul class="nav flex-column mb-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center gap-2" href="#">
+                                    <a class="nav-link d-flex align-items-center gap-2" href="{% url 'settings' %}">
                                         <svg class="bi"><use xlink:href="#gear-wide-connected"/></svg>
                                         Settings
                                     </a>
@@ -183,47 +176,49 @@
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                       <h1 class="h2">View Posts</h1>
                     </div>
-
                     <div class="container mt-4 p-lg-5 p-3 bg-light shadow">
-                      <table class="table table-striped table-bordered table-sm">  
-                          <thead class="thead-dark">  
-                          <tr>  
-                              <th>#</th>  
-                              <th>Title</th>  
-                              <!-- <th>Content</th>   -->
-                              <th>Created_at</th>  
-                              <th>Actions</th>  
-                          </tr>  
-                          </thead>  
-                          <tbody>  
-                          {% for blog in Posts %}  
-                          <tr>  
-                              <td>{{ blog.id }}</td>  
-                              <td><a href="/update/{{ blog.id }}">{{ blog.title }}</a></td>  
-                              <!-- <td>{{ Post.content }}</td>   -->
-                              <td>{{ blog.created_at }}</td>  
-                              <td class="d-flex">  
-                                <!-- Edit -->
-                                  <a href="/update/{{ blog.id }}" style="text-decoration: none;color: white;">
-                                    <button class="btn btn-success btn-sm"> 
-                                      <i class="bi bi-pencil-square pe-2"></i>Edit
-                                    </button>
-                                  </a>
-                                  <!-- Delete -->
-                                  <a href="/delete_post/{{blog.id}}" class="nav-link ms-2">
-                                    <button type="button" class=" align-items-center gap-2 btn btn-danger btn-sm">
-                                      <i class="bi bi-trash3-fill pe-2"></i>Delete
-                                    </button>
-                                  </a>
-                              </td> 
-                          </tr>  
-                          {% endfor %}  
-                          </tbody>  
-                      </table> 
-                      <div class="text-end mt-4">
-                          <a href="{%url 'add_post'%}" class="btn btn-primary"><i class="bi bi-plus-lg pe-2"></i>   Add New Record</a>
-                      </div>
+                        <div class="table-responsive"> <!-- Added responsive wrapper -->
+                            <table class="table table-striped table-bordered table-sm">  
+                                <thead class="thead-dark">  
+                                    <tr>  
+                                        <th>#</th>  
+                                        <th>Title</th>  
+                                        <!-- <th>Content</th>   -->
+                                        <th>Created_at</th>  
+                                        <th>Actions</th> 
+                                    </tr>  
+                                </thead>  
+                                <tbody>  
+                                    {% for blog in Posts %}  
+                                    <tr>  
+                                        <td>{{ blog.id }}</td>  
+                                        <td><a href="/update/{{ blog.id }}">{{ blog.title }}</a></td>  
+                                        <!-- <td>{{ Post.content }}</td>   -->
+                                        <td>{{ blog.created_at }}</td>  
+                                        <td class="d-flex">  
+                                        <!-- Edit -->
+                                            <a href="/update/{{ blog.id }}" style="text-decoration: none;color: white;">
+                                            <button class="btn btn-success btn-sm"> 
+                                                <i class="bi bi-pencil-square pe-2"></i>Edit
+                                            </button>
+                                            </a>
+                                            <!-- Delete -->
+                                            <a href="/delete_post/{{blog.id}}" class="nav-link ms-2">
+                                            <button type="button" class=" align-items-center gap-2 btn btn-danger btn-sm">
+                                                <i class="bi bi-trash3-fill pe-2"></i>Delete
+                                            </button>
+                                            </a>
+                                        </td> 
+                                    </tr>  
+                                    {% endfor %}  
+                                </tbody>  
+                            </table>
+                            <div class="text-end mt-4">
+                                <a href="{%url 'add_post'%}" class="btn btn-primary"><i class="bi bi-plus-lg pe-2"></i>   Add New Record</a>
+                            </div>
+                        </div>
                     </div>
+                      
                 </main>
             </div>
         </div>

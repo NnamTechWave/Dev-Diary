@@ -68,28 +68,17 @@
             <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="{% url 'add_post' %}">Dev-Dairy</a>
         
             <ul class="navbar-nav flex-row d-md-none">
-                <li class="nav-item text-nowrap">
-                    <button class="nav-link px-3 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSearch" aria-controls="navbarSearch" aria-expanded="false" aria-label="Toggle search">
-                        <svg class="bi"><use xlink:href="#search"/></svg>
-                    </button>
-                </li>
-                <li class="nav-item text-nowrap">
-                    <button class="nav-link px-3 text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                        <svg class="bi"><use xlink:href="#list"/></svg>
-                    </button>
-                </li>
+                <button class="navbar-toggle px-3 nav-link p-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
             </ul>
-        
-            <div id="navbarSearch" class="navbar-search w-100 collapse">
-                <input class="form-control w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
-            </div>
         </header>
     
         <div class="container-fluid">
             <div class="row">
                 <div class="sidebar border border-right col-md-3 col-lg-2 p-0 ">
                     <div class="offcanvas-md offcanvas-end" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
-                        <div class="offcanvas-header">
+                        <div class="offcanvas-header bg-light text-dark">
                             <h5 class="offcanvas-title" id="sidebarMenuLabel">Dev-Dairy</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
                         </div>
