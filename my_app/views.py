@@ -224,7 +224,7 @@ def admin_login(request):
 
 
 def admin_dashboard(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.is_superuser:
         post_count = blog.objects.count()
         comment_count = Comment.objects.count()
         users_count = User.objects.count()
@@ -270,32 +270,35 @@ def view_user(request):
 
 
 def edit_user(request, id):
-    if request.user.is_authenticated:
+    # Ensure that the user is a superuser
+    if request.user.is_superuser:
         user_detail = get_object_or_404(User, id=id)
         
         if request.method == 'POST':
             form = EditUserForm(request.POST, instance=user_detail)
             if form.is_valid():
                 user = form.save()
-                # Logout the user if they remove themselves from staff or admin
-                logout(request)
-                
-                # Check if the current user is changing their own status
-                if request.user.id == user.id:
-                    if not user.is_staff or not user.is_superuser:
-                        messages.success(request, 'Your profile was updated, and you have been logged out due to permission changes.')
-                        return redirect('admin_login')  # Redirect to the login page
 
+                # Check if the current admin user is editing their own profile
+                if request.user.id == user.id:
+                    # If the admin removed themselves from staff or superuser, log them out
+                    if not user.is_staff or not user.is_superuser:
+                        logout(request)
+                        messages.success(request, 'Your profile was updated, and you have been logged out due to permission changes.')
+                        return redirect('admin_login')  # Redirect to login since privileges changed
+                
+                # If editing another user, show a success message and stay on the edit page
                 messages.success(request, 'User details updated successfully.')
                 return redirect('edit_user', id=id)
         else:
             form = EditUserForm(instance=user_detail)
         
         return render(request, 'admin/edit_user.html', {'form': form})
+    
     else:
-        messages.error(request, 'You must be logged in to edit users.')
+        messages.error(request, 'You must be an admin to edit users.')
         return redirect('admin_login')
-
+    
 def delete_users(request, id):
     if request.user.is_authenticated:
         user_detail = get_object_or_404(User, id=id)
